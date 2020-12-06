@@ -17,7 +17,7 @@ namespace MovieManagement.App.Concrete
         {
             List<MenuAction> result = new List<MenuAction>();
 
-            foreach(var menuAction in Movies)
+            foreach(var menuAction in Items)
             {
                 if(menuAction.MenuName == menuName)
                 {

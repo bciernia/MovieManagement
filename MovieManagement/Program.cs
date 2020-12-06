@@ -31,8 +31,7 @@ namespace MovieManagement
                 switch (choice.KeyChar)
                 {
                     case '1':
-                        var id = actionService.GetLastId();
-                        id = movieManager.AddNewMovie(id);
+                        var id = movieManager.AddNewMovie();
                         break;
                     case '2':
                         movieManager.ArchiveMovie();

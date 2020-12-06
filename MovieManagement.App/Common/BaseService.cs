@@ -10,24 +10,24 @@ namespace MovieManagement.App.Common
 {
     public class BaseService<T> : IService<T> where T : BaseEntity
     {
-        public List<T> Movies { get; set; }
+        public List<T> Items { get; set; }
         public BaseService()
         {
-            Movies = new List<T>();
+            Items = new List<T>();
         }
 
         public int AddMovie(T movie)
         {
-            Movies.Add(movie);
+            Items.Add(movie);
             return movie.Id;
         }
 
         public int GetLastId()
         {
             int lastId;
-            if(Movies.Any())
+            if(Items.Any())
             {
-                lastId = Movies.OrderBy(x => x.Id).LastOrDefault().Id;
+                lastId = Items.OrderBy(x => x.Id).LastOrDefault().Id;
             }    
             else
             {
@@ -39,7 +39,7 @@ namespace MovieManagement.App.Common
 
         public int ArchiveMovie(T movie)
         {
-            var entity = Movies.FirstOrDefault(x => x.Id == movie.Id);
+            var entity = Items.FirstOrDefault(x => x.Id == movie.Id);
             if (entity != null)
             {
                 entity = movie;
@@ -49,12 +49,12 @@ namespace MovieManagement.App.Common
 
         public List<T> GetAllMovies()
         {
-            return Movies;
+            return Items;
         }
 
         public int UpdateMovie(T movie)
         {
-            var entity = Movies.FirstOrDefault(x => x.Id == movie.Id);
+            var entity = Items.FirstOrDefault(x => x.Id == movie.Id);
             if(entity != null)
             {
                 entity = movie;
@@ -64,7 +64,7 @@ namespace MovieManagement.App.Common
 
         public T GetMovieById(int id)
         {
-            var movie = Movies.FirstOrDefault(x => x.Id == id);
+            var movie = Items.FirstOrDefault(x => x.Id == id);
             return movie;
         }
     }

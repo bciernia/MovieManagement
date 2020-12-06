@@ -11,7 +11,7 @@ namespace MovieManagement.App.Concrete
     {
            public MovieService()
            {
-               Movies = new List<Movie>();
+              Items = new List<Movie>();
            }
     }
 }

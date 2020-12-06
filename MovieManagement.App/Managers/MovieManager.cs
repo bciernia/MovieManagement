@@ -18,7 +18,7 @@ namespace MovieManagement.App.Managers
             _actionService = actionService;
         }
 
-        public int AddNewMovie(int id)
+        public int AddNewMovie()
         {
             Console.Write("Enter name of movie: ");
             var movieName = Console.ReadLine();
@@ -29,16 +29,22 @@ namespace MovieManagement.App.Managers
                 Console.WriteLine($"{movieTypesMenu[i].Id}. {movieTypesMenu[i].Name}");
             }
             var option = Console.ReadKey();
-            var categoryId = 0;
-            Int32.TryParse(option.ToString(), out categoryId);
+            int categoryId = 0;
+            Int32.TryParse(option.KeyChar.ToString(), out categoryId);
+            if (categoryId > 1 || categoryId < 7)
+            {
+                categoryId = 8;
+            }
             var lastId = _movieService.GetLastId();
-            Movie movie = new Movie(lastId++, movieName, categoryId);
+            lastId++;
+
+            Movie movie = new Movie(lastId, movieName, categoryId);
             _movieService.AddMovie(movie);
 
             Console.Clear();
-            return id;
+            return movie.Id;
         }
-
+        //ocenianie filmu
         public void ArchiveMovie()
         {
             Console.WriteLine("Which movie did you watch?");
@@ -53,12 +59,21 @@ namespace MovieManagement.App.Managers
                 }
             }
             var movieToArchive = Console.ReadKey();
-            var id = 0;
-            Int32.TryParse(movieToArchive.ToString(), out id);
-
+            int id;
+            Int32.TryParse(movieToArchive.KeyChar.ToString(), out id);
+            Console.Write("\nRate movie from 1 to 10: ");
+            var option = Console.ReadKey();
+            var rate = 0;
+            Int32.TryParse(option.KeyChar.ToString(), out rate);
+            if (rate < 1 || rate > 10)
+            {
+                rate = 0;
+            }
             var movie = _movieService.GetMovieById(id);
+            movie.Rate = rate;
             movie.IsWatched = true;
             _movieService.ArchiveMovie(movie);
+            Console.Clear();
         }
 
         public void DisplayMovieList(MenuActionService actionService)
