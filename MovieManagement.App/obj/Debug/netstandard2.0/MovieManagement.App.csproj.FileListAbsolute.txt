@@ -1,0 +1,12 @@
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\bin\Debug\netstandard2.0\MovieManagement.App.deps.json
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\bin\Debug\netstandard2.0\MovieManagement.App.dll
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\bin\Debug\netstandard2.0\MovieManagement.App.pdb
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\bin\Debug\netstandard2.0\MovieManagement.Domain.dll
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\bin\Debug\netstandard2.0\MovieManagement.Domain.pdb
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\obj\Debug\netstandard2.0\MovieManagement.App.csprojAssemblyReference.cache
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\obj\Debug\netstandard2.0\MovieManagement.App.AssemblyInfoInputs.cache
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\obj\Debug\netstandard2.0\MovieManagement.App.AssemblyInfo.cs
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\obj\Debug\netstandard2.0\MovieManagement.App.csproj.CoreCompileInputs.cache
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\obj\Debug\netstandard2.0\MovieManagement.App.csproj.CopyComplete
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\obj\Debug\netstandard2.0\MovieManagement.App.dll
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.App\obj\Debug\netstandard2.0\MovieManagement.App.pdb

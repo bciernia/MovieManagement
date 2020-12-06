@@ -1,0 +1,9 @@
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\bin\Debug\netstandard2.0\MovieManagement.Domain.deps.json
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\bin\Debug\netstandard2.0\MovieManagement.Domain.dll
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\bin\Debug\netstandard2.0\MovieManagement.Domain.pdb
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\obj\Debug\netstandard2.0\MovieManagement.Domain.csprojAssemblyReference.cache
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\obj\Debug\netstandard2.0\MovieManagement.Domain.AssemblyInfoInputs.cache
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\obj\Debug\netstandard2.0\MovieManagement.Domain.AssemblyInfo.cs
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\obj\Debug\netstandard2.0\MovieManagement.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\obj\Debug\netstandard2.0\MovieManagement.Domain.dll
+C:\Users\Barti\source\repos\MovieManagement\MovieManagement.Domain\obj\Debug\netstandard2.0\MovieManagement.Domain.pdb
