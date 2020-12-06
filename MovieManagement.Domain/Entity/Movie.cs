@@ -15,7 +15,7 @@ namespace MovieManagement.Domain.Entity
         public Movie(int id, string name, int categoryId)
         {
             Id = id;
-            Name = name;
+            Name = name; 
             CategoryId = categoryId;
         }
     }
