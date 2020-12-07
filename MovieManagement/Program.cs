@@ -37,9 +37,12 @@ namespace MovieManagement
                         movieManager.ArchiveMovie();
                         break;
                     case '3':
-                        movieManager.DisplayMovieList(actionService);
+                        movieManager.DisplayMovieDetails();
                         break;
                     case '4':
+                        movieManager.DisplayMovieList(actionService);
+                        break;
+                    case '5':
                         Console.WriteLine("See you next time!");
                         turnOff = true;
                         break;

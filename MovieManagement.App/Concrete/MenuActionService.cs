@@ -30,8 +30,9 @@ namespace MovieManagement.App.Concrete
         {
             AddMovie(new MenuAction(1, "Add movie", "Main"));
             AddMovie(new MenuAction(2, "Rate movie", "Main"));
-            AddMovie(new MenuAction(3, "Your movies", "Main"));
-            AddMovie(new MenuAction(4, "Exit", "Main"));
+            AddMovie(new MenuAction(3, "Movie details", "Main"));
+            AddMovie(new MenuAction(4, "All movies", "Main"));
+            AddMovie(new MenuAction(5, "Exit", "Main"));
 
             AddMovie(new MenuAction(1, "Action", "MovieType"));
             AddMovie(new MenuAction(2, "Comedy", "MovieType"));
@@ -44,8 +45,6 @@ namespace MovieManagement.App.Concrete
             AddMovie(new MenuAction(1, "All movies", "DisplayMovies"));
             AddMovie(new MenuAction(2, "Movies to watch", "DisplayMovies"));
             AddMovie(new MenuAction(3, "Watched movies", "DisplayMovies"));
-
-          
         }
 
     }
