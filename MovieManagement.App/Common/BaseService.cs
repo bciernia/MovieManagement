@@ -64,8 +64,13 @@ namespace MovieManagement.App.Common
 
         public T GetMovieById(int id)
         {
-            var movie = Items.FirstOrDefault(x => x.Id == id);
-            return movie;
+            var entity = Items.FirstOrDefault(x => x.Id == id);
+            return entity;
+        }
+
+        public void RemoveMovie(T movie)
+        {
+            Items.Remove(movie);
         }
     }
 }

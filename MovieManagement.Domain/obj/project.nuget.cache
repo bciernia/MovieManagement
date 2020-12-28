@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "XmdUEqk2eKF1H9a7eGkZ/rxPl0LOHZV9nU6SERjtHlhtTUMzlgu2ltVd14Z19pazG9vRO61BTuaSUcOLVmrrVA==",
+  "dgSpecHash": "JuMLShvTwbZqk4QEQbT1sgFmea//Ecw8RP6YViUHEE2wrviu3NocWoBSG6dT6qUDWz5Pd8WQ+emf1kNccMpR0Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Barti\\source\\repos\\MovieManagement\\MovieManagement.Domain\\MovieManagement.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Barti\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }

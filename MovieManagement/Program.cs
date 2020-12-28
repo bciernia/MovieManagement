@@ -1,5 +1,7 @@
 ﻿using MovieManagement.App.Concrete;
 using MovieManagement.App.Managers;
+using MovieManagement.Domain.Entity;
+using MovieManagement.Domain.Helpers;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +14,12 @@ namespace MovieManagement
             bool turnOff = false;
 
             MenuActionService actionService = new MenuActionService();
-            MovieManager movieManager = new MovieManager(actionService);
+            MovieService movieService = new MovieService();
+            InformationProvider informationProvider = new InformationProvider();
+            MovieManager movieManager = new MovieManager(actionService, movieService, informationProvider);
+            ListService listService = new ListService();
+
+            movieService.Items = listService.DeserializeFromFile();
 
             Console.WriteLine("Welcome to your movies app!");
 
@@ -31,16 +38,16 @@ namespace MovieManagement
                 switch (choice.KeyChar)
                 {
                     case '1':
-                        var id = movieManager.AddNewMovie();
+                        var id = movieManager.AddNewMovie(movieService);
                         break;
                     case '2':
-                        movieManager.ArchiveMovie();
+                        movieManager.ArchiveMovieById(movieService);
                         break;
                     case '3':
-                        movieManager.DisplayMovieDetails();
+                        movieManager.DisplayMovieDetails(movieService);
                         break;
                     case '4':
-                        movieManager.DisplayMovieList(actionService);
+                        movieManager.DisplayMovieList(movieService, actionService);
                         break;
                     case '5':
                         Console.WriteLine("See you next time!");

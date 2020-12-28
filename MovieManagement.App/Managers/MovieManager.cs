@@ -5,78 +5,102 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using MovieManagement.App.Helpers;
+using MovieManagement.App.Abstract;
+using MovieManagement.Domain.Helpers;
 
 namespace MovieManagement.App.Managers
 {
     public class MovieManager
     {
         private readonly MenuActionService _actionService;
-        private MovieService _movieService;
-
-        public MovieManager(MenuActionService actionService)
+        private InformationProvider _informationProvider;
+        private ListService _listService;
+        public MovieManager(MenuActionService actionService, IService<Movie> movieService, InformationProvider informationProvider)
         {
-            _movieService = new MovieService();
+            _informationProvider = new InformationProvider();
             _actionService = actionService;
+            _listService = new ListService();
         }
 
-        public int AddNewMovie()
+        public int AddNewMovie(MovieService movieService)
         {
-            Console.Write("Enter name of movie: ");
-            var movieName = Console.ReadLine();
-            Console.WriteLine("Select category of movie:");
+            _informationProvider.ShowSingleMessage("Enter name of movie: ");
+            var movieName = _informationProvider.GetInputString();
+            _informationProvider.ShowSingleMessage("Select category of movie: ");
+
             var movieTypesMenu = _actionService.GetMenuActionsByMenuName("MovieType");
             for (int i = 0; i < movieTypesMenu.Count; i++)
             {
-                Console.WriteLine($"{movieTypesMenu[i].Id}. {movieTypesMenu[i].Name}");
+                _informationProvider.ShowSingleMessage($"{movieTypesMenu[i].Id}. {movieTypesMenu[i].Name}");
             }
-            var option = Console.ReadKey();
-            int categoryId = 0;
-            Int32.TryParse(option.KeyChar.ToString(), out categoryId);
+
+            var categoryId = _informationProvider.GetNumericInputKey();
+
             if (categoryId < 1 || categoryId > 7)
             {
                 categoryId = 8;
             }
-            var lastId = _movieService.GetLastId();
+            var lastId = movieService.GetLastId();
             lastId++;
 
-            Console.WriteLine("\nEnter the release year: ");
-            string year = Console.ReadLine();
-            int releaseYear;
-            Int32.TryParse(year, out releaseYear);
+            _informationProvider.ShowSingleMessage("\nEnter the release year:");
+            var releaseYear = _informationProvider.GetNumericValue();
 
-            Console.WriteLine("Enter director's name: ");
-            string directorsName = Console.ReadLine();
+            _informationProvider.ShowSingleMessage("Enter name of director: ");
+            string directorsName = _informationProvider.GetInputString();
             MovieType movieType = new MovieType();
             movieType = (MovieType)categoryId;
 
+            var movie = new Movie(lastId, movieName, movieType, releaseYear, directorsName);
+            movieService.AddMovie(movie);
 
-            Movie movie = new Movie(lastId, movieName, movieType, releaseYear, directorsName);
-            _movieService.AddMovie(movie);
+            _listService.SerializeToFile(movieService.Items);
 
             Console.Clear();
             return movie.Id;
         }
-        //ocenianie filmu
-        public void ArchiveMovie()
-        {
-            Console.WriteLine("Which movie did you watch?");
 
-            var watchedMovies = _movieService.GetAllMovies();
+        public void RemoveMovieById(int id, MovieService movieService)
+        {
+            var movie = movieService.GetMovieById(id);
+            movieService.RemoveMovie(movie);
+        }
+
+        public void ArchiveMovieById(MovieService movieService)
+        {
+            bool isMovieToArchive = false;
+            _informationProvider.ShowSingleMessage("Which movie did you watch?");
+
+            var watchedMovies = movieService.GetAllMovies();
 
             for (int i = 0; i < watchedMovies.Count; i++)
             {
                 if (watchedMovies[i].IsWatched == false)
                 {
-                    Console.WriteLine($"{watchedMovies[i].Id}. {watchedMovies[i].Name}, {watchedMovies[i].CategoryId}");
+                    _informationProvider.ShowSingleMessage($"{watchedMovies[i].Id}. {watchedMovies[i].Name}, {watchedMovies[i].Category}");
                 }
             }
-            var movieToArchive = Console.ReadKey();
-            int id;
-            Int32.TryParse(movieToArchive.KeyChar.ToString(), out id);
-            Console.Write("\nRate movie from 1 to 10: ");
-            var option = Console.ReadLine();
-            var rate = 0;
-            Int32.TryParse(option, out rate);
+
+            var movieToArchive = _informationProvider.GetNumericInputKey();
+
+            foreach (var number in movieService.Items)
+            {
+                if (movieToArchive == number.Id)
+                {
+                    isMovieToArchive = true;
+                }
+            }
+
+            if (isMovieToArchive == false)
+            {
+                Console.Clear();
+                return;
+            }
+
+            _informationProvider.ShowSingleMessage("\nRate movie from 1 to 10: ");
+
+            var rate = _informationProvider.GetNumericValue();
+
             if (rate < 1)
             {
                 rate = 0;
@@ -85,92 +109,93 @@ namespace MovieManagement.App.Managers
             {
                 rate = 10;
             }
-            var movie = _movieService.GetMovieById(id);
+            var movie = movieService.GetMovieById(movieToArchive);
+
             movie.Rate = rate;
             movie.IsWatched = true;
-            _movieService.ArchiveMovie(movie);
+            movieService.ArchiveMovie(movie);
+            _listService.SerializeToFile(movieService.Items);
+
             Console.Clear();
         }
 
-        public void DisplayMovieList(MenuActionService actionService)
+        public void DisplayMovieList(MovieService movieService, MenuActionService actionService)
         {
             Console.Clear();
-            Console.WriteLine("Which list you want to see?");
+            _informationProvider.ShowSingleMessage("Which list you want to see?");
 
             var displayMovieMenu = actionService.GetMenuActionsByMenuName("DisplayMovies");
             for (int i = 0; i < displayMovieMenu.Count; i++)
             {
-                Console.WriteLine($"{displayMovieMenu[i].Id}. {displayMovieMenu[i].Name}");
+                _informationProvider.ShowSingleMessage($"{displayMovieMenu[i].Id}. {displayMovieMenu[i].Name}");
             }
-            var option = Console.ReadKey();
-            var watchedMovies = _movieService.GetAllMovies();
+            var option = _informationProvider.GetNumericInputKey();
+            var watchedMovies = movieService.GetAllMovies();
             Console.Clear();
-            switch (option.KeyChar)
+            switch (option)
             {
-                case '1':
+                case 1:
                     for (int i = 0; i < watchedMovies.Count; i++)
                     {
                         if (watchedMovies[i].IsWatched == false)
                         {
-                            Console.WriteLine($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}'");
+                            _informationProvider.ShowSingleMessage($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}'");
                         }
                         else
                         {
-                            Console.WriteLine($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}', Rate: {watchedMovies[i].Rate}");
+                            _informationProvider.ShowSingleMessage($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}', Rate: {watchedMovies[i].Rate}");
                         }
                     }
                     break;
-                case '2':
+                case 2:
                     for (int i = 0; i < watchedMovies.Count; i++)
                     {
                         if (watchedMovies[i].IsWatched == false)
                         {
-                            Console.WriteLine($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}'");
+                            _informationProvider.ShowSingleMessage($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}'");
                         }
                     }
                     break;
-                case '3':
+                case 3:
                     for (int i = 0; i < watchedMovies.Count; i++)
                     {
                         if (watchedMovies[i].IsWatched == true)
                         {
-                            Console.WriteLine($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}', Rate: {watchedMovies[i].Rate}");
+                            _informationProvider.ShowSingleMessage($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}', Rate: {watchedMovies[i].Rate}");
                         }
                     }
                     break;
                 default:
-                    Console.WriteLine("Wrong option, try again.");
+                    _informationProvider.ShowSingleMessage("Wrong option, try again.");
                     break;
             }
             Console.ReadKey();
             Console.Clear();
         }
-        public void DisplayMovieDetails()
+        public void DisplayMovieDetails(MovieService movieService)
         {
-            var watchedMovies = _movieService.GetAllMovies();
+            var watchedMovies = movieService.GetAllMovies();
             for (int i = 0; i < watchedMovies.Count; i++)
             {
-                Console.WriteLine($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}'");
+                _informationProvider.ShowSingleMessage($"{watchedMovies[i].Id}. '{watchedMovies[i].Name}'");
             }
-            Console.WriteLine("\nWhich movie's details you want to see?");
-            var option = Console.ReadKey();
-            int selectedMovie;
-            Int32.TryParse(option.KeyChar.ToString(), out selectedMovie);
-            var movie = _movieService.GetMovieById(selectedMovie);
+            _informationProvider.ShowSingleMessage("\nWhich movie's details you want to see?");
+            var selectedMovie = _informationProvider.GetNumericInputKey();
+            var movie = movieService.GetMovieById(selectedMovie);
             if (movie == null)
             {
                 Console.Clear();
                 return;
             }
             Console.Clear();
-            Console.WriteLine($"Number of movie in data base: {movie.Id}\n" +
+            _informationProvider.ShowSingleMessage($"Number of movie in data base: {movie.Id}\n" +
                 $"Movie title: {movie.Name}\n" +
-                $"Movie type: {movie.CategoryId}\n" +
+                $"Movie type: {movie.Category}\n" +
                 $"Year of release: {movie.ReleaseYear}\n" +
                 $"Director's name: {movie.DirectorsName}");
             if (movie.IsWatched == true)
             {
-                Console.WriteLine($"Your rate: {movie.Rate}");
+                _informationProvider.ShowSingleMessage($"Your rate: {movie.Rate}");
             }
             Console.ReadKey();
             Console.Clear();

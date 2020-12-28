@@ -13,5 +13,6 @@ namespace MovieManagement.App.Concrete
            {
               Items = new List<Movie>();
            }
+
     }
 }

@@ -13,5 +13,6 @@ namespace MovieManagement.App.Abstract
         int AddMovie(T movie);
         int UpdateMovie(T movie);
         int ArchiveMovie(T movie);
+        void RemoveMovie(T movie);
     }
 }   

@@ -26,7 +26,7 @@ namespace MovieManagement.App.Concrete
             }
             return result;
         }
-        private void  Initialize()
+        private void Initialize()
         {
             AddMovie(new MenuAction(1, "Add movie", "Main"));
             AddMovie(new MenuAction(2, "Rate movie", "Main"));

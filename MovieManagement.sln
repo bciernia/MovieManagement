@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManagement", "MovieManagement\MovieManagement.csproj", "{4A9C7DB8-5714-48C1-AA25-53F8BA4D7A9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManagement.App", "MovieManagement.App\MovieManagement.App.csproj", "{2AF76BFC-3F54-4230-A0F7-AB7140CF5D7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManagement.App", "MovieManagement.App\MovieManagement.App.csproj", "{2AF76BFC-3F54-4230-A0F7-AB7140CF5D7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManagement.Domain", "MovieManagement.Domain\MovieManagement.Domain.csproj", "{D0118790-5F4A-48AD-9CE6-CFAB36A7357E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManagement.Domain", "MovieManagement.Domain\MovieManagement.Domain.csproj", "{D0118790-5F4A-48AD-9CE6-CFAB36A7357E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
